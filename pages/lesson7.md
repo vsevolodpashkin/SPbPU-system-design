@@ -1,5 +1,5 @@
 ---
-hide: true
+hide: false
 layout: center
 ---
 
@@ -21,7 +21,7 @@ h1 {
 </style>
 
 ---
-hide: true
+hide: false
 layout: default
 ---
 
@@ -94,7 +94,7 @@ layout: default
 
 
 ---
-hide: true
+hide: false
 layout: default
 ---
 
@@ -218,7 +218,7 @@ layout: default
 
 
 ---
-hide: true
+hide: false
 layout: two-cols
 layoutClass: gap-8
 ---
@@ -247,7 +247,7 @@ layoutClass: gap-8
 </div>
 
 ---
-hide: true
+hide: false
 layout: two-cols
 layoutClass: gap-8
 ---
@@ -277,7 +277,7 @@ layoutClass: gap-8
 </div>
 
 ---
-hide: true
+hide: false
 layout: two-cols
 layoutClass: gap-8
 ---
@@ -305,7 +305,7 @@ layoutClass: gap-8
 </div>
 
 ---
-hide: true
+hide: false
 layout: default
 ---
 
@@ -401,7 +401,7 @@ layout: default
 </div>
 
 ---
-hide: true
+hide: false
 layout: default
 ---
 
@@ -485,7 +485,7 @@ layout: default
 </div>
 
 ---
-hide: true
+hide: false
 layout: default
 ---
 
@@ -604,7 +604,7 @@ layout: default
 </div>
 
 ---
-hide: true
+hide: false
 layout: default
 ---
 
@@ -666,7 +666,7 @@ layout: default
 </div>
 
 ---
-hide: true
+hide: false
 layout: default
 ---
 
@@ -759,7 +759,251 @@ layout: default
 </div>
 
 ---
-hide: true
+hide: false
+layout: default
+---
+
+# Long Polling
+
+<p class="text-sm leading-snug -mt-3 text-gray-500">
+  Клиент отправляет запрос, <strong class="text-gray-700">сервер держит соединение</strong> до появления новых данных,
+  потом отвечает.
+</p>
+
+<div class="mt-2 bg-white border border-slate-200 rounded-xl p-3">
+  <svg viewBox="0 0 460 140" class="w-full" text-rendering="geometricPrecision">
+    <defs>
+      <marker id="arrow-amber" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#d97706"/>
+      </marker>
+    </defs>
+    <rect x="20" y="50" width="90" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="65" y="65" text-anchor="middle" fill="#1e40af" font-size="12" style="font-size:12px" font-weight="600">Клиент</text>
+    <text x="65" y="78" text-anchor="middle" fill="#60a5fa" font-size="9" style="font-size:9px">HTTP request</text>
+    <rect x="350" y="50" width="90" height="34" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="395" y="65" text-anchor="middle" fill="#92400e" font-size="12" style="font-size:12px" font-weight="600">Сервер</text>
+    <text x="395" y="78" text-anchor="middle" fill="#a16208" font-size="9" style="font-size:9px">ждёт данные</text>
+    <line x1="110" y1="50" x2="350" y2="50" stroke="#d97706" stroke-width="2" marker-end="url(#arrow-amber)"/>
+    <rect x="225" y="38" width="10" height="20" rx="2" fill="#fbbf24"/>
+    <text x="230" y="32" text-anchor="middle" fill="#92400e" font-size="9" style="font-size:9px">hold</text>
+    <line x1="350" y1="84" x2="110" y2="84" stroke="#d97706" stroke-width="2" marker-end="url(#arrow-amber)"/>
+    <path d="M 110 100 Q 230 120 110 100" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#arrow-amber)"/>
+    <text x="65" y="118" text-anchor="middle" fill="#d97706" font-size="9" style="font-size:9px">сразу новый запрос</text>
+    <text x="230" y="22" text-anchor="middle" fill="#d97706" font-size="10" style="font-size:10px" font-weight="600">request (hold until data ready)</text>
+    <text x="230" y="98" text-anchor="middle" fill="#d97706" font-size="10" style="font-size:10px" font-weight="600">response (with data)</text>
+  </svg>
+</div>
+
+<div class="mt-3 grid grid-cols-2 gap-3">
+  <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5">
+    <div class="text-[11px] font-bold text-emerald-800 mb-1">✓ Плюсы</div>
+    <ul class="text-[10.5px] text-emerald-900 space-y-0.5">
+      <li>• Работает через обычный HTTP (любой сервер)</li>
+      <li>• Совместимо со всеми прокси/CDN</li>
+      <li>• Push-подобное поведение без push-протокола</li>
+      <li>• Нативная поддержка в браузерах</li>
+    </ul>
+  </div>
+  <div class="bg-rose-50 border border-rose-200 rounded-lg p-2.5">
+    <div class="text-[11px] font-bold text-rose-800 mb-1">✗ Минусы</div>
+    <ul class="text-[10.5px] text-rose-900 space-y-0.5">
+      <li>• Каждый цикл — новый TCP/HTTP (overhead)</li>
+      <li>• Держать соединение открытым — ресурсы сервера</li>
+      <li>• Сложная серверная логика (отложенные ответы)</li>
+      <li>• Таймауты прокси могут убивать соединение</li>
+    </ul>
+  </div>
+</div>
+
+<div class="abs-b m-4 flex justify-between items-center text-sm opacity-70">
+  <a href="/SSE">← Server-Sent Events</a>
+  <a href="/ShortPolling">Short Polling →</a>
+</div>
+
+---
+hide: false
+layout: default
+---
+
+# Short Polling
+
+<p class="text-sm leading-snug -mt-3 text-gray-500">
+  Клиент <strong class="text-gray-700">периодически шлёт запросы</strong> через фиксированные интервалы
+  (например, раз в 5 секунд).
+</p>
+
+<div class="mt-2 bg-white border border-slate-200 rounded-xl p-3">
+  <svg viewBox="0 0 460 140" class="w-full" text-rendering="geometricPrecision">
+    <defs>
+      <marker id="arrow-violet" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#7c3aed"/>
+      </marker>
+    </defs>
+    <rect x="20" y="50" width="90" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="65" y="65" text-anchor="middle" fill="#1e40af" font-size="3" font-weight="600">Клиент</text>
+    <text x="65" y="78" text-anchor="middle" fill="#60a5fa" font-size="3">setInterval</text>
+    <rect x="350" y="50" width="90" height="34" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="395" y="65" text-anchor="middle" fill="#5b21b6" font-size="3" font-weight="600">Сервер</text>
+    <text x="395" y="78" text-anchor="middle" fill="#a78bfa" font-size="3">HTTP response</text>
+    <line x1="110" y1="50" x2="350" y2="50" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-violet)"/>
+    <text x="230" y="44" text-anchor="middle" fill="#7c3aed" font-size="3">GET /data</text>
+    <line x1="350" y1="84" x2="110" y2="84" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-violet)"/>
+    <text x="230" y="100" text-anchor="middle" fill="#7c3aed" font-size="3">200 OK (с данными или пусто)</text>
+    <text x="230" y="124" text-anchor="middle" fill="#64748b" font-size="3" font-style="italic">цикл каждые N секунд (например, 5с)</text>
+    <line x1="120" y1="112" x2="340" y2="112" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2,3"/>
+    <text x="60" y="113" text-anchor="middle" fill="#64748b" font-size="3">t</text>
+    <text x="400" y="113" text-anchor="middle" fill="#64748b" font-size="3">t+N</text>
+  </svg>
+</div>
+
+<div class="mt-3 grid grid-cols-2 gap-3">
+  <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5">
+    <div class="text-[11px] font-bold text-emerald-800 mb-1">✓ Плюсы</div>
+    <ul class="text-[10.5px] text-emerald-900 space-y-0.5">
+      <li>• Простейшая реализация — обычный HTTP-запрос</li>
+      <li>• Работает на любом сервере, в любой инфраструктуре</li>
+      <li>• Легко отлаживать (привычные HTTP-инструменты)</li>
+      <li>• Совместимо с HTTP-кешами/CDN</li>
+    </ul>
+  </div>
+  <div class="bg-rose-50 border border-rose-200 rounded-lg p-2.5">
+    <div class="text-[11px] font-bold text-rose-800 mb-1">✗ Минусы</div>
+    <ul class="text-[10.5px] text-rose-900 space-y-0.5">
+      <li>• Задержка = интервал опроса (до N секунд)</li>
+      <li>• Пустые ответы жгут трафик и CPU</li>
+      <li>• Не реал-тайм (никогда не "свежее" интервала)</li>
+      <li>• Сложно масштабировать при малом интервале</li>
+    </ul>
+  </div>
+</div>
+
+<div class="abs-b m-4 flex justify-between items-center text-sm opacity-70">
+  <a href="/LongPolling">← Long Polling</a>
+  <a href="/lesson6">Занятие 6 →</a>
+</div>
+
+---
+hide: false
+layout: default
+---
+
+# Server-Sent Events (SSE)
+
+<p class="text-sm leading-snug -mt-3 text-gray-500">
+  <strong class="text-gray-700">Однонаправленная</strong> push-нотификация от сервера к клиенту. Простой протокол на базе HTTP/1.1 chunked transfer.
+</p>
+
+<div class="mt-2 bg-white border border-slate-200 rounded-xl p-3">
+  <svg viewBox="0 0 460 140" class="w-full" text-rendering="geometricPrecision">
+    <defs>
+      <marker id="arrow-rose" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#e11d48"/>
+      </marker>
+    </defs>
+    <rect x="20" y="50" width="90" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="65" y="65" text-anchor="middle" fill="#1e40af" font-size="12" style="font-size:12px" font-weight="600">Клиент</text>
+    <text x="65" y="78" text-anchor="middle" fill="#60a5fa" font-size="9" style="font-size:9px">EventSource</text>
+    <rect x="350" y="50" width="90" height="34" rx="6" fill="#ffe4e6" stroke="#e11d48" stroke-width="1.5"/>
+    <text x="395" y="65" text-anchor="middle" fill="#9f1239" font-size="12" style="font-size:12px" font-weight="600">Сервер</text>
+    <text x="395" y="78" text-anchor="middle" fill="#fb7185" font-size="9" style="font-size:9px">text/event-stream</text>
+    <line x1="110" y1="67" x2="350" y2="67" stroke="#e11d48" stroke-width="2" marker-end="url(#arrow-rose)"/>
+    <text x="230" y="59" text-anchor="middle" fill="#e11d48" font-size="10" style="font-size:10px" font-weight="600">server → client (event stream)</text>
+    <text x="230" y="93" text-anchor="middle" fill="#64748b" font-size="2" font-style="italic">клиент только читает; данные от сервера</text>
+    <text x="230" y="115" text-anchor="middle" fill="#64748b" font-size="6" style="font-size:9px">переподключение встроено (auto-reconnect)</text>
+    <rect x="110" y="40" width="240" height="60" rx="6" fill="none" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="230" y="32" text-anchor="middle" fill="#64748b" font-size="10" style="font-size:10px">persistent HTTP connection (chunked)</text>
+  </svg>
+</div>
+
+<div class="mt-3 grid grid-cols-2 gap-3">
+  <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5">
+    <div class="text-[11px] font-bold text-emerald-800 mb-1">✓ Плюсы</div>
+    <ul class="text-[10.5px] text-emerald-900 space-y-0.5">
+      <li>• Обычный HTTP — не нужен отдельный протокол</li>
+      <li>• Авто-reconnect из коробки (браузер сам)</li>
+      <li>• Прост на сервере (один text/event-stream endpoint)</li>
+      <li>• Проходит через большинство прокси/CDN</li>
+    </ul>
+  </div>
+  <div class="bg-rose-50 border border-rose-200 rounded-lg p-2.5">
+    <div class="text-[11px] font-bold text-rose-800 mb-1">✗ Минусы</div>
+    <ul class="text-[10.5px] text-rose-900 space-y-0.5">
+      <li>• Только server → client (нет обратного канала)</li>
+      <li>• Ограничение: 6 одновременных HTTP/1.1 соединений на браузер</li>
+      <li>• Только text (нет бинарных данных)</li>
+      <li>• Поддержка браузерами хорошая, но не везде</li>
+    </ul>
+  </div>
+</div>
+
+<div class="abs-b m-4 flex justify-between items-center text-sm opacity-70">
+  <a href="/WebSocket">← WebSocket</a>
+  <a href="/LongPolling">Long Polling →</a>
+</div>
+
+---
+hide: false
+layout: default
+---
+
+# WebSocket
+
+<p class="text-sm leading-snug -mt-3 text-gray-500">
+  <strong class="text-gray-700">Двунаправленный</strong> канал поверх TCP: один handshake — потом
+  <strong class="text-gray-700">полнодуплексный обмен</strong> в реальном времени без HTTP-обёртки.
+</p>
+
+<div class="mt-2 bg-white border border-slate-200 rounded-xl p-3">
+  <svg viewBox="0 0 460 140" class="w-full" text-rendering="geometricPrecision">
+    <defs>
+      <marker id="arrow-cyan" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#0891b2"/>
+      </marker>
+    </defs>
+    <rect x="20" y="50" width="90" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="65" y="65" text-anchor="middle" fill="#1e40af" font-size="12" style="font-size:12px" font-weight="600">Клиент</text>
+    <text x="65" y="78" text-anchor="middle" fill="#60a5fa" font-size="9" style="font-size:9px">Browser/JS</text>
+    <rect x="350" y="50" width="90" height="34" rx="6" fill="#fae8ff" stroke="#9333ea" stroke-width="1.5"/>
+    <text x="395" y="65" text-anchor="middle" fill="#6b21a8" font-size="12" style="font-size:12px" font-weight="600">Сервер</text>
+    <text x="395" y="78" text-anchor="middle" fill="#a855f7" font-size="9" style="font-size:9px">ws / wss</text>
+    <line x1="110" y1="60" x2="350" y2="60" stroke="#0891b2" stroke-width="2" marker-end="url(#arrow-cyan)"/>
+    <line x1="350" y1="80" x2="110" y2="80" stroke="#0891b2" stroke-width="2" marker-end="url(#arrow-cyan)"/>
+    <text x="230" y="52" text-anchor="middle" fill="#0891b2" font-size="10" style="font-size:10px" font-weight="600">client → server (message)</text>
+    <text x="230" y="93" text-anchor="middle" fill="#0891b2" font-size="10" style="font-size:10px" font-weight="600">server → client (push)</text>
+    <text x="230" y="115" text-anchor="middle" fill="#64748b" font-size="3" font-style="italic">одно TCP-соединение, full-duplex</text>
+    <rect x="110" y="40" width="240" height="60" rx="6" fill="none" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="230" y="32" text-anchor="middle" fill="#64748b" font-size="10" style="font-size:10px">persistent WebSocket connection</text>
+  </svg>
+</div>
+
+<div class="mt-3 grid grid-cols-2 gap-3">
+  <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5">
+    <div class="text-[11px] font-bold text-emerald-800 mb-1">✓ Плюсы</div>
+    <ul class="text-[10.5px] text-emerald-900 space-y-0.5">
+      <li>• Полный дуплекс, реал-тайм (chat, игры, коллаборация)</li>
+      <li>• Один handshake → нет overhead HTTP-заголовков</li>
+      <li>• Широкая поддержка в браузерах и серверах</li>
+      <li>• Бинарные и текстовые фреймы</li>
+    </ul>
+  </div>
+  <div class="bg-rose-50 border border-rose-200 rounded-lg p-2.5">
+    <div class="text-[11px] font-bold text-rose-800 mb-1">✗ Минусы</div>
+    <ul class="text-[10.5px] text-rose-900 space-y-0.5">
+      <li>• Нужен WS-сервер (не каждый HTTP-сервер умеет)</li>
+      <li>• Сложнее через прокси/load balancer</li>
+      <li>• Постоянное соединение жрёт ресурсы при простое</li>
+      <li>• Нет автоматического fallback на HTTP</li>
+    </ul>
+  </div>
+</div>
+
+<div class="abs-b m-4 flex justify-between items-center text-sm opacity-70">
+  <a href="/Сервисы">← Сервисы</a>
+  <a href="/SSE">SSE →</a>
+</div>
+
+---
+hide: false
 layout: two-cols
 layoutClass: gap-8
 ---
@@ -789,7 +1033,7 @@ layoutClass: gap-8
 </div>
 
 ---
-hide: true
+hide: false
 layout: two-cols
 layoutClass: gap-8
 ---
@@ -878,7 +1122,7 @@ em {
 
 
 ---
-hide: true
+hide: false
 layout: default
 ---
 
@@ -995,249 +1239,4 @@ layout: default
 <div class="abs-b m-4 flex justify-between items-center text-sm opacity-70">
   <a href="/lesson7">← Занятие 7</a>
   <a href="/lesson9">Занятие 9 →</a>
-</div>
-
----
-hide: true
-layout: default
----
-
-# WebSocket
-
-<p class="text-sm leading-snug -mt-3 text-gray-500">
-  <strong class="text-gray-700">Двунаправленный</strong> канал поверх TCP: один handshake — потом
-  <strong class="text-gray-700">полнодуплексный обмен</strong> в реальном времени без HTTP-обёртки.
-</p>
-
-<div class="mt-2 bg-white border border-slate-200 rounded-xl p-3">
-  <svg viewBox="0 0 460 140" class="w-full" text-rendering="geometricPrecision">
-    <defs>
-      <marker id="arrow-cyan" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-        <path d="M0,0 L0,6 L9,3 z" fill="#0891b2"/>
-      </marker>
-    </defs>
-    <rect x="20" y="50" width="90" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="65" y="65" text-anchor="middle" fill="#1e40af" font-size="12" style="font-size:12px" font-weight="600">Клиент</text>
-    <text x="65" y="78" text-anchor="middle" fill="#60a5fa" font-size="9" style="font-size:9px">Browser/JS</text>
-    <rect x="350" y="50" width="90" height="34" rx="6" fill="#fae8ff" stroke="#9333ea" stroke-width="1.5"/>
-    <text x="395" y="65" text-anchor="middle" fill="#6b21a8" font-size="12" style="font-size:12px" font-weight="600">Сервер</text>
-    <text x="395" y="78" text-anchor="middle" fill="#a855f7" font-size="9" style="font-size:9px">ws / wss</text>
-    <line x1="110" y1="60" x2="350" y2="60" stroke="#0891b2" stroke-width="2" marker-end="url(#arrow-cyan)"/>
-    <line x1="350" y1="80" x2="110" y2="80" stroke="#0891b2" stroke-width="2" marker-end="url(#arrow-cyan)"/>
-    <text x="230" y="52" text-anchor="middle" fill="#0891b2" font-size="10" style="font-size:10px" font-weight="600">client → server (message)</text>
-    <text x="230" y="93" text-anchor="middle" fill="#0891b2" font-size="10" style="font-size:10px" font-weight="600">server → client (push)</text>
-    <text x="230" y="115" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">одно TCP-соединение, full-duplex</text>
-    <rect x="100" y="40" width="260" height="60" rx="6" fill="none" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
-    <text x="230" y="32" text-anchor="middle" fill="#64748b" font-size="10" style="font-size:10px">persistent WebSocket connection</text>
-  </svg>
-</div>
-
-<div class="mt-3 grid grid-cols-2 gap-3">
-  <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5">
-    <div class="text-[11px] font-bold text-emerald-800 mb-1">✓ Плюсы</div>
-    <ul class="text-[10.5px] text-emerald-900 space-y-0.5">
-      <li>• Полный дуплекс, реал-тайм (chat, игры, коллаборация)</li>
-      <li>• Один handshake → нет overhead HTTP-заголовков</li>
-      <li>• Широкая поддержка в браузерах и серверах</li>
-      <li>• Бинарные и текстовые фреймы</li>
-    </ul>
-  </div>
-  <div class="bg-rose-50 border border-rose-200 rounded-lg p-2.5">
-    <div class="text-[11px] font-bold text-rose-800 mb-1">✗ Минусы</div>
-    <ul class="text-[10.5px] text-rose-900 space-y-0.5">
-      <li>• Нужен WS-сервер (не каждый HTTP-сервер умеет)</li>
-      <li>• Сложнее через прокси/load balancer</li>
-      <li>• Постоянное соединение жрёт ресурсы при простое</li>
-      <li>• Нет автоматического fallback на HTTP</li>
-    </ul>
-  </div>
-</div>
-
-<div class="abs-b m-4 flex justify-between items-center text-sm opacity-70">
-  <a href="/Сервисы">← Сервисы</a>
-  <a href="/SSE">SSE →</a>
-</div>
-
----
-hide: true
-layout: default
----
-
-# Server-Sent Events (SSE)
-
-<p class="text-sm leading-snug -mt-3 text-gray-500">
-  <strong class="text-gray-700">Однонаправленная</strong> push-нотификация от сервера к клиенту поверх обычного HTTP
-  (text/event-stream). Простой протокол на базе HTTP/1.1 chunked transfer.
-</p>
-
-<div class="mt-2 bg-white border border-slate-200 rounded-xl p-3">
-  <svg viewBox="0 0 460 140" class="w-full" text-rendering="geometricPrecision">
-    <defs>
-      <marker id="arrow-rose" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-        <path d="M0,0 L0,6 L9,3 z" fill="#e11d48"/>
-      </marker>
-    </defs>
-    <rect x="20" y="50" width="90" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="65" y="65" text-anchor="middle" fill="#1e40af" font-size="12" style="font-size:12px" font-weight="600">Клиент</text>
-    <text x="65" y="78" text-anchor="middle" fill="#60a5fa" font-size="9" style="font-size:9px">EventSource</text>
-    <rect x="350" y="50" width="90" height="34" rx="6" fill="#ffe4e6" stroke="#e11d48" stroke-width="1.5"/>
-    <text x="395" y="65" text-anchor="middle" fill="#9f1239" font-size="12" style="font-size:12px" font-weight="600">Сервер</text>
-    <text x="395" y="78" text-anchor="middle" fill="#fb7185" font-size="9" style="font-size:9px">text/event-stream</text>
-    <line x1="110" y1="67" x2="350" y2="67" stroke="#e11d48" stroke-width="2" marker-end="url(#arrow-rose)"/>
-    <text x="230" y="59" text-anchor="middle" fill="#e11d48" font-size="10" style="font-size:10px" font-weight="600">server → client (event stream)</text>
-    <text x="230" y="93" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">клиент только читает; данные от сервера</text>
-    <text x="230" y="115" text-anchor="middle" fill="#64748b" font-size="9" style="font-size:9px">переподключение встроено (auto-reconnect)</text>
-    <rect x="100" y="40" width="260" height="60" rx="6" fill="none" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
-    <text x="230" y="32" text-anchor="middle" fill="#64748b" font-size="10" style="font-size:10px">persistent HTTP connection (chunked)</text>
-  </svg>
-</div>
-
-<div class="mt-3 grid grid-cols-2 gap-3">
-  <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5">
-    <div class="text-[11px] font-bold text-emerald-800 mb-1">✓ Плюсы</div>
-    <ul class="text-[10.5px] text-emerald-900 space-y-0.5">
-      <li>• Обычный HTTP — не нужен отдельный протокол</li>
-      <li>• Авто-reconnect из коробки (браузер сам)</li>
-      <li>• Прост на сервере (один text/event-stream endpoint)</li>
-      <li>• Проходит через большинство прокси/CDN</li>
-    </ul>
-  </div>
-  <div class="bg-rose-50 border border-rose-200 rounded-lg p-2.5">
-    <div class="text-[11px] font-bold text-rose-800 mb-1">✗ Минусы</div>
-    <ul class="text-[10.5px] text-rose-900 space-y-0.5">
-      <li>• Только server → client (нет обратного канала)</li>
-      <li>• Ограничение: 6 одновременных HTTP/1.1 соединений на браузер</li>
-      <li>• Только text (нет бинарных данных)</li>
-      <li>• Поддержка браузерами хорошая, но не везде</li>
-    </ul>
-  </div>
-</div>
-
-<div class="abs-b m-4 flex justify-between items-center text-sm opacity-70">
-  <a href="/WebSocket">← WebSocket</a>
-  <a href="/LongPolling">Long Polling →</a>
-</div>
-
----
-hide: true
-layout: default
----
-
-# Long Polling
-
-<p class="text-sm leading-snug -mt-3 text-gray-500">
-  Клиент отправляет запрос, <strong class="text-gray-700">сервер держит соединение</strong> до появления новых данных,
-  потом отвечает. Сразу после ответа клиент шлёт следующий запрос.
-</p>
-
-<div class="mt-2 bg-white border border-slate-200 rounded-xl p-3">
-  <svg viewBox="0 0 460 140" class="w-full" text-rendering="geometricPrecision">
-    <defs>
-      <marker id="arrow-amber" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-        <path d="M0,0 L0,6 L9,3 z" fill="#d97706"/>
-      </marker>
-    </defs>
-    <rect x="20" y="50" width="90" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="65" y="65" text-anchor="middle" fill="#1e40af" font-size="12" style="font-size:12px" font-weight="600">Клиент</text>
-    <text x="65" y="78" text-anchor="middle" fill="#60a5fa" font-size="9" style="font-size:9px">HTTP request</text>
-    <rect x="350" y="50" width="90" height="34" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
-    <text x="395" y="65" text-anchor="middle" fill="#92400e" font-size="12" style="font-size:12px" font-weight="600">Сервер</text>
-    <text x="395" y="78" text-anchor="middle" fill="#a16208" font-size="9" style="font-size:9px">ждёт данные</text>
-    <line x1="110" y1="50" x2="350" y2="50" stroke="#d97706" stroke-width="2" marker-end="url(#arrow-amber)"/>
-    <rect x="225" y="38" width="10" height="20" rx="2" fill="#fbbf24"/>
-    <text x="230" y="32" text-anchor="middle" fill="#92400e" font-size="9" style="font-size:9px">hold</text>
-    <line x1="350" y1="84" x2="110" y2="84" stroke="#d97706" stroke-width="2" marker-end="url(#arrow-amber)"/>
-    <path d="M 110 100 Q 230 120 110 100" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#arrow-amber)"/>
-    <text x="65" y="118" text-anchor="middle" fill="#d97706" font-size="9" style="font-size:9px">сразу новый запрос</text>
-    <text x="230" y="22" text-anchor="middle" fill="#d97706" font-size="10" style="font-size:10px" font-weight="600">request (hold until data ready)</text>
-    <text x="230" y="98" text-anchor="middle" fill="#d97706" font-size="10" style="font-size:10px" font-weight="600">response (with data)</text>
-  </svg>
-</div>
-
-<div class="mt-3 grid grid-cols-2 gap-3">
-  <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5">
-    <div class="text-[11px] font-bold text-emerald-800 mb-1">✓ Плюсы</div>
-    <ul class="text-[10.5px] text-emerald-900 space-y-0.5">
-      <li>• Работает через обычный HTTP (любой сервер)</li>
-      <li>• Совместимо со всеми прокси/CDN</li>
-      <li>• Push-подобное поведение без push-протокола</li>
-      <li>• Нативная поддержка в браузерах</li>
-    </ul>
-  </div>
-  <div class="bg-rose-50 border border-rose-200 rounded-lg p-2.5">
-    <div class="text-[11px] font-bold text-rose-800 mb-1">✗ Минусы</div>
-    <ul class="text-[10.5px] text-rose-900 space-y-0.5">
-      <li>• Каждый цикл — новый TCP/HTTP (overhead)</li>
-      <li>• Держать соединение открытым — ресурсы сервера</li>
-      <li>• Сложная серверная логика (отложенные ответы)</li>
-      <li>• Таймауты прокси могут убивать соединение</li>
-    </ul>
-  </div>
-</div>
-
-<div class="abs-b m-4 flex justify-between items-center text-sm opacity-70">
-  <a href="/SSE">← Server-Sent Events</a>
-  <a href="/ShortPolling">Short Polling →</a>
-</div>
-
----
-hide: true
-layout: default
----
-
-# Short Polling
-
-<p class="text-sm leading-snug -mt-3 text-gray-500">
-  Клиент <strong class="text-gray-700">периодически шлёт запросы</strong> через фиксированные интервалы
-  (например, раз в 5 секунд). Сервер отвечает сразу — есть данные или нет.
-</p>
-
-<div class="mt-2 bg-white border border-slate-200 rounded-xl p-3">
-  <svg viewBox="0 0 460 140" class="w-full" text-rendering="geometricPrecision">
-    <defs>
-      <marker id="arrow-violet" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-        <path d="M0,0 L0,6 L9,3 z" fill="#7c3aed"/>
-      </marker>
-    </defs>
-    <rect x="20" y="50" width="90" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
-    <text x="65" y="65" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="600">Клиент</text>
-    <text x="65" y="78" text-anchor="middle" fill="#60a5fa" font-size="9">setInterval</text>
-    <rect x="350" y="50" width="90" height="34" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
-    <text x="395" y="65" text-anchor="middle" fill="#5b21b6" font-size="12" font-weight="600">Сервер</text>
-    <text x="395" y="78" text-anchor="middle" fill="#a78bfa" font-size="9">HTTP response</text>
-    <line x1="110" y1="50" x2="350" y2="50" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-violet)"/>
-    <text x="230" y="44" text-anchor="middle" fill="#7c3aed" font-size="9">GET /data</text>
-    <line x1="350" y1="84" x2="110" y2="84" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-violet)"/>
-    <text x="230" y="100" text-anchor="middle" fill="#7c3aed" font-size="9">200 OK (с данными или пусто)</text>
-    <text x="230" y="124" text-anchor="middle" fill="#64748b" font-size="10" font-style="italic">цикл каждые N секунд (например, 5с)</text>
-    <line x1="120" y1="112" x2="340" y2="112" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2,3"/>
-    <text x="60" y="113" text-anchor="middle" fill="#64748b" font-size="9">t</text>
-    <text x="400" y="113" text-anchor="middle" fill="#64748b" font-size="9">t+N</text>
-  </svg>
-</div>
-
-<div class="mt-3 grid grid-cols-2 gap-3">
-  <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5">
-    <div class="text-[11px] font-bold text-emerald-800 mb-1">✓ Плюсы</div>
-    <ul class="text-[10.5px] text-emerald-900 space-y-0.5">
-      <li>• Простейшая реализация — обычный HTTP-запрос</li>
-      <li>• Работает на любом сервере, в любой инфраструктуре</li>
-      <li>• Легко отлаживать (привычные HTTP-инструменты)</li>
-      <li>• Совместимо с HTTP-кешами/CDN</li>
-    </ul>
-  </div>
-  <div class="bg-rose-50 border border-rose-200 rounded-lg p-2.5">
-    <div class="text-[11px] font-bold text-rose-800 mb-1">✗ Минусы</div>
-    <ul class="text-[10.5px] text-rose-900 space-y-0.5">
-      <li>• Задержка = интервал опроса (до N секунд)</li>
-      <li>• Пустые ответы жгут трафик и CPU</li>
-      <li>• Не реал-тайм (никогда не "свежее" интервала)</li>
-      <li>• Сложно масштабировать при малом интервале</li>
-    </ul>
-  </div>
-</div>
-
-<div class="abs-b m-4 flex justify-between items-center text-sm opacity-70">
-  <a href="/LongPolling">← Long Polling</a>
-  <a href="/lesson6">Занятие 6 →</a>
 </div>
