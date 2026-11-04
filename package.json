@@ -7,7 +7,8 @@
     "dev": "slidev --open",
     "start": "slidev",
     "build": "slidev build",
-    "export": "slidev export"
+    "export": "slidev export",
+    "check:bounds": "node scripts/check-slide-bounds.mjs"
   },
   "engines": {
     "node": ">=18.0.0"

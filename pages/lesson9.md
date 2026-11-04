@@ -5,7 +5,7 @@ layout: center
 
 # Архитектура ПО
 
-<div class="text-xl text-gray-400 font-light mt-3 tracking-[0.2em] uppercase">Часть 2. Тактики и решения. Основы </div>
+<div class="text-xl text-gray-400 font-light mt-3 tracking-[0.2em] uppercase">Часть 2. Архитектурно-значимые требования. Тактики и решения</div>
 <div class="mt-5 mx-auto w-20 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"></div>
 
 <style>
@@ -135,98 +135,91 @@ layout: default
 
 # Монолитная многоуровневая архитектура
 
-<p class="text-sm leading-snug -mt-3 text-gray-500">
-Единый артефакт с разделением кода на слои: <strong class="text-gray-700">Presentation → Business Logic → Data Access</strong>. Без строгой дисциплины быстро превращается в «big ball of mud».
-</p>
+<div class="grid grid-cols-[300px_1fr] gap-4 mt-1 items-start">
 
-<div class="grid grid-cols-2 gap-4 mt-2">
+<!-- Левая колонка: суть + плюсы и минусы -->
+<div class="flex flex-col gap-1.5">
 
-<!-- Преимущества -->
-<div class="bg-emerald-50 border-l-4 border-emerald-500 rounded p-2.5">
-  <h3 class="text-sm font-semibold text-emerald-800 mb-1.5 flex items-center gap-1.5">
-    <span class="text-emerald-600">✓</span> Преимущества
-  </h3>
-  <ul class="text-xs text-gray-700 leading-snug space-y-1">
-    <li>• <strong class="text-gray-900">Простая структура</strong> — легко понять и начать</li>
-    <li>• <strong class="text-gray-900">Один артефакт</strong> — быстрый локальный деплой</li>
-    <li>• <strong class="text-gray-900">Стандартные паттерны</strong> — привычные инструменты</li>
-    <li>• <strong class="text-gray-900">Простое тестирование</strong> — слои изолированы</li>
-  </ul>
+  <p class="text-[11px] text-gray-500">
+    Единый артефакт: <strong class="text-gray-700">Presentation → Business → Data Access</strong>. Без строгой дисциплины — «big ball of mud».
+  </p>
+
+  <!-- Преимущества -->
+  <div class="bg-emerald-50 border-l-4 border-emerald-500 rounded px-2 py-1">
+    <h3 class="text-xs font-semibold text-emerald-800 mb-1 flex items-center gap-1.5">
+      <span class="text-emerald-600">✓</span> Преимущества
+    </h3>
+    <ul class="text-[11px] text-gray-700 leading-snug space-y-0.5">
+      <li><strong class="text-gray-900">Простая структура</strong> — легко понять и начать</li>
+      <li><strong class="text-gray-900">Один артефакт</strong> — быстрый локальный деплой</li>
+      <li><strong class="text-gray-900">Стандартные паттерны</strong> — привычные инструменты</li>
+      <li><strong class="text-gray-900">Простое тестирование</strong> — слои изолированы</li>
+    </ul>
+  </div>
+
+  <!-- Недостатки -->
+  <div class="bg-red-50 border-l-4 border-red-500 rounded px-2 py-1">
+    <h3 class="text-xs font-semibold text-red-800 mb-1 flex items-center gap-1.5">
+      <span class="text-red-600">✗</span> Недостатки
+    </h3>
+    <ul class="text-[11px] text-gray-700 leading-snug space-y-0.5">
+      <li><strong class="text-gray-900">Сильная связанность</strong> при слабой дисциплине</li>
+      <li><strong class="text-gray-900">Только целиком</strong> — нет частичного масштабирования</li>
+      <li><strong class="text-gray-900">Долгие build/deploy</strong> с ростом кодовой базы</li>
+      <li><strong class="text-gray-900">Lock-in на стек</strong> + single point of failure</li>
+    </ul>
+  </div>
+
 </div>
 
-<!-- Недостатки -->
-<div class="bg-red-50 border-l-4 border-red-500 rounded p-2.5">
-  <h3 class="text-sm font-semibold text-red-800 mb-1.5 flex items-center gap-1.5">
-    <span class="text-red-600">✗</span> Недостатки
-  </h3>
-  <ul class="text-xs text-gray-700 leading-snug space-y-1">
-    <li>• <strong class="text-gray-900">Сильная связанность</strong> при слабой дисциплине</li>
-    <li>• <strong class="text-gray-900">Только целиком</strong> — нет частичного масштабирования</li>
-    <li>• <strong class="text-gray-900">Долгие build/deploy</strong> с ростом кодовой базы</li>
-    <li>• <strong class="text-gray-900">Lock-in на стек</strong> + single point of failure</li>
-  </ul>
-</div>
-
-</div>
-
-<!-- Пример спагетти-кода -->
-<div class="mt-2.5">
-  <div class="text-xs text-gray-500 mb-1 flex items-center gap-2">
+<!-- Правая колонка: пример кода -->
+<div class="min-w-0">
+  <div class="text-[10px] text-gray-500 mb-1 flex items-center gap-2">
     <span class="font-mono text-gray-700">app.py</span>
     <span class="text-gray-300">·</span>
     <span>спагетти-вариант: все слои в одном файле</span>
   </div>
-  <div class="bg-gray-900 rounded-lg p-2.5 overflow-hidden">
+  <div class="bg-gray-900 rounded-lg p-2 overflow-hidden">
 
-<pre class="text-[9px] leading-[1.3] font-mono text-gray-100 overflow-auto"><code><span class="text-purple-400">import</span> sqlite3
-<span class="text-purple-400">from</span> flask <span class="text-purple-400">import</span> Flask, request, jsonify
+<pre class="text-[8px] leading-[1.25] font-mono text-gray-100"><code><span class="text-purple-400">import</span> sqlite3
+<span class="text-purple-400">from</span> flask <span class="text-purple-400">import</span> Flask, jsonify
 
 app = Flask(__name__)
 
 <span class="text-purple-400">def</span> <span class="text-yellow-300">db</span>(): <span class="text-purple-400">return</span> sqlite3.connect(<span class="text-emerald-300">"shop.db"</span>)  <span class="text-gray-500"># «слой данных»</span>
 
-<span class="text-purple-400">def</span> <span class="text-yellow-300">get_user</span>(uid):                                                <span class="text-gray-500"># бизнес</span>
+<span class="text-purple-400">def</span> <span class="text-yellow-300">get_user</span>(uid):                             <span class="text-gray-500"># бизнес</span>
     r = db().execute(<span class="text-emerald-300">"SELECT * FROM users WHERE id=?"</span>, (uid,)).fetchone()
     <span class="text-purple-400">return</span> r <span class="text-purple-400">and</span> {<span class="text-emerald-300">"id"</span>: r[<span class="text-amber-300">0</span>], <span class="text-emerald-300">"name"</span>: r[<span class="text-amber-300">1</span>], <span class="text-emerald-300">"balance"</span>: r[<span class="text-amber-300">2</span>]}
 
-<span class="text-purple-400">def</span> <span class="text-yellow-300">charge_user</span>(uid, amount):                                    <span class="text-gray-500"># бизнес → данные + email</span>
+<span class="text-purple-400">def</span> <span class="text-yellow-300">charge_user</span>(uid, amount):                   <span class="text-gray-500"># бизнес → данные + email</span>
     user = get_user(uid)
     <span class="text-purple-400">if not</span> user <span class="text-purple-400">or</span> user[<span class="text-emerald-300">"balance"</span>] &lt; amount:
-        send_email(uid, <span class="text-emerald-300">"no money"</span>)                              <span class="text-gray-500"># → email</span>
+        send_email(uid, <span class="text-emerald-300">"no money"</span>)                          <span class="text-gray-500"># → email</span>
         <span class="text-purple-400">return</span> <span class="text-purple-400">False</span>
     db().execute(<span class="text-emerald-300">"UPDATE users SET balance=balance-? WHERE id=?"</span>, (amount, uid))
     <span class="text-purple-400">return</span> <span class="text-purple-400">True</span>
 
-<span class="text-purple-400">def</span> <span class="text-yellow-300">send_email</span>(uid, msg):                                         <span class="text-gray-500"># бизнес знает про SMTP</span>
+<span class="text-purple-400">def</span> <span class="text-yellow-300">send_email</span>(uid, msg):                      <span class="text-gray-500"># бизнес знает про SMTP</span>
     <span class="text-purple-400">print</span>(<span class="text-green-300">f"[SMTP] u{uid}: {msg}"</span>)
 
-<span class="text-purple-400">def</span> <span class="text-yellow-300">place_order</span>(uid, items):                                     <span class="text-gray-500"># бизнес</span>
+<span class="text-purple-400">def</span> <span class="text-yellow-300">place_order</span>(uid, items):                   <span class="text-gray-500"># бизнес</span>
     total = <span class="text-yellow-300">sum</span>(i[<span class="text-emerald-300">"price"</span>]*i[<span class="text-emerald-300">"qty"</span>] <span class="text-purple-400">for</span> i <span class="text-purple-400">in</span> items)
     <span class="text-purple-400">if not</span> charge_user(uid, total): <span class="text-purple-400">return</span> <span class="text-purple-400">None</span>
     cur = db().execute(<span class="text-emerald-300">"INSERT INTO orders VALUES(NULL,?,?,1)"</span>, (uid, total))
     send_email(uid, <span class="text-emerald-300">f"order #{cur.lastrowid}"</span>)
-    <span class="text-purple-400">if</span> total &gt; <span class="text-amber-300">10000</span>: notify_admin(<span class="text-emerald-300">f"big #{cur.lastrowid}"</span>)  <span class="text-gray-500"># → админ</span>
     <span class="text-purple-400">return</span> cur.lastrowid
 
-<span class="text-purple-400">def</span> <span class="text-yellow-300">notify_admin</span>(m): <span class="text-purple-400">print</span>(<span class="text-emerald-300">f"[ADMIN] {m}"</span>)              <span class="text-gray-500"># бизнес знает админа</span>
-
 <span class="text-cyan-300">@app</span>.route(<span class="text-emerald-300">"/users/&lt;int:uid&gt;"</span>)
-<span class="text-purple-400">def</span> <span class="text-yellow-300">user_view</span>(uid):                                             <span class="text-gray-500"># presentation</span>
+<span class="text-purple-400">def</span> <span class="text-yellow-300">user_view</span>(uid):                        <span class="text-gray-500"># presentation</span>
     user = get_user(uid)
     <span class="text-purple-400">if not</span> user: <span class="text-purple-400">return</span> jsonify({<span class="text-emerald-300">"error"</span>:<span class="text-emerald-300">"not_found"</span>}), <span class="text-amber-300">404</span>
     <span class="text-gray-500"># presentation лезет в БД напрямую:</span>
     cnt = db().execute(<span class="text-emerald-300">"SELECT COUNT(*) FROM orders WHERE user_id=?"</span>, (uid,)).fetchone()[<span class="text-amber-300">0</span>]
-    <span class="text-purple-400">return</span> jsonify({**user, <span class="text-emerald-300">"orders_count"</span>: cnt})
-
-<span class="text-cyan-300">@app</span>.route(<span class="text-emerald-300">"/orders"</span>, methods=[<span class="text-emerald-300">"POST"</span>])
-<span class="text-purple-400">def</span> <span class="text-yellow-300">create_order</span>():
-    d = request.get_json()
-    oid = place_order(d[<span class="text-emerald-300">"user_id"</span>], d[<span class="text-emerald-300">"items"</span>])
-    <span class="text-purple-400">return</span> jsonify({<span class="text-emerald-300">"order_id"</span>: oid}) <span class="text-purple-400">if</span> oid <span class="text-purple-400">else</span> (jsonify({<span class="text-emerald-300">"error"</span>:<span class="text-emerald-300">"pay"</span>}), <span class="text-amber-300">402</span>)
-
-db().executescript(<span class="text-emerald-300">"CREATE TABLE users(id,name,balance); CREATE TABLE orders(id,user_id,total,paid);"</span>)
-app.run(debug=<span class="text-purple-400">True</span>)</code></pre>
+    <span class="text-purple-400">return</span> jsonify({**user, <span class="text-emerald-300">"orders_count"</span>: cnt})</code></pre>
   </div>
+</div>
+
 </div>
 
 <div class="abs-b m-4 flex justify-between items-center text-sm opacity-70">
@@ -282,10 +275,10 @@ layout: default
       <strong class="text-emerald-800 text-base">Плюсы</strong>
     </div>
     <ul class="text-xs text-gray-800 leading-snug space-y-1">
-      <li class="flex gap-1.5"><span class="text-emerald-600 font-bold mt-0.5">✓</span><div><strong class="text-gray-900">Высокая масштабируемость</strong> — каждый сервис масштабируется независимо под свою нагрузку</div></li>
-      <li class="flex gap-1.5"><span class="text-emerald-600 font-bold mt-0.5">✓</span><div><strong class="text-gray-900">Гибкость изменения</strong> — изменение одного сервиса не затрагивает остальные, легче катить релизы</div></li>
-      <li class="flex gap-1.5"><span class="text-emerald-600 font-bold mt-0.5">✓</span><div><strong class="text-gray-900">Модульность</strong> — каждый сервис = отдельная бизнес-возможность со своей командой и стеком</div></li>
-      <li class="flex gap-1.5"><span class="text-emerald-600 font-bold mt-0.5">✓</span><div><strong class="text-gray-900">Эластичность</strong> — автоматическое масштабирование спотовой нагрузки, отказ отдельных узлов без потери системы</div></li>
+      <li class="flex gap-1.5"><span class="text-emerald-600 font-bold mt-0.5">✓</span><div class="leading-[15px]"><strong class="text-gray-900">Высокая масштабируемость</strong> — каждый сервис масштабируется независимо под свою нагрузку</div></li>
+      <li class="flex gap-1.5"><span class="text-emerald-600 font-bold mt-0.5">✓</span><div class="leading-[15px]"><strong class="text-gray-900">Гибкость изменения</strong> — изменение одного сервиса не затрагивает остальные, легче катить релизы</div></li>
+      <li class="flex gap-1.5"><span class="text-emerald-600 font-bold mt-0.5">✓</span><div class="leading-[15px]"><strong class="text-gray-900">Модульность</strong> — каждый сервис = отдельная бизнес-возможность со своей командой и стеком</div></li>
+      <li class="flex gap-1.5"><span class="text-emerald-600 font-bold mt-0.5">✓</span><div class="leading-[15px]"><strong class="text-gray-900">Эластичность</strong> — автоматическое масштабирование спотовой нагрузки, отказ отдельных узлов без потери системы</div></li>
     </ul>
   </div>
 
@@ -301,10 +294,10 @@ layout: default
       <strong class="text-red-800 text-base">Минусы</strong>
     </div>
     <ul class="text-xs text-gray-800 leading-snug space-y-1">
-      <li class="flex gap-1.5"><span class="text-red-600 font-bold mt-0.5">✗</span><div><strong class="text-gray-900">Сложность общего решения</strong> — распределённые транзакции, сетевые задержки, eventual consistency</div></li>
-      <li class="flex gap-1.5"><span class="text-red-600 font-bold mt-0.5">✗</span><div><strong class="text-gray-900">Общая стоимость владения</strong> — больше инфраструктуры, мониторинга, команд DevOps</div></li>
-      <li class="flex gap-1.5"><span class="text-red-600 font-bold mt-0.5">✗</span><div><strong class="text-gray-900">Скорость работы</strong> — сетевые вызовы между сервисами медленнее вызовов функций в монолите</div></li>
-      <li class="flex gap-1.5"><span class="text-red-600 font-bold mt-0.5">✗</span><div><strong class="text-gray-900">Сложность инфраструктуры</strong> — CI/CD, service mesh, observability, развёртывание — отдельная дисциплина</div></li>
+      <li class="flex gap-1.5"><span class="text-red-600 font-bold mt-0.5">✗</span><div class="leading-[15px]"><strong class="text-gray-900">Сложность общего решения</strong> — распределённые транзакции, сетевые задержки, eventual consistency</div></li>
+      <li class="flex gap-1.5"><span class="text-red-600 font-bold mt-0.5">✗</span><div class="leading-[15px]"><strong class="text-gray-900">Общая стоимость владения</strong> — больше инфраструктуры, мониторинга, команд DevOps</div></li>
+      <li class="flex gap-1.5"><span class="text-red-600 font-bold mt-0.5">✗</span><div class="leading-[15px]"><strong class="text-gray-900">Скорость работы</strong> — сетевые вызовы между сервисами медленнее вызовов функций в монолите</div></li>
+      <li class="flex gap-1.5"><span class="text-red-600 font-bold mt-0.5">✗</span><div class="leading-[15px]"><strong class="text-gray-900">Сложность инфраструктуры</strong> — CI/CD, service mesh, observability, развёртывание — отдельная дисциплина</div></li>
     </ul>
   </div>
 
