@@ -144,7 +144,7 @@ layout: default
 
 <!-- Карта тем по архитектуре ПО -->
 <div class="flex items-center justify-center mt-2">
-  <img src="/Software_Architecture_MindMap.png" alt="Карта тем по архитектуре программного обеспечения: архитектурные основы, архитектурные стили и паттерны, интеграции, архитектура предприятия и бизнес, практики и компетенции, управление и технологическая среда" class="rounded shadow-md border border-gray-200 max-h-[380px] max-w-full object-contain bg-white" />
+  <img src="/Software_Architecture_MindMap.webp" alt="Карта тем по архитектуре программного обеспечения: архитектурные основы, архитектурные стили и паттерны, интеграции, архитектура предприятия и бизнес, практики и компетенции, управление и технологическая среда" class="rounded shadow-md border border-gray-200 max-h-[380px] max-w-full object-contain bg-white" />
 </div>
 
 <!-- Источник -->
@@ -278,7 +278,7 @@ layout: default
 
 <!-- Модель качества ISO/IEC 25010 -->
 <div class="flex items-center justify-center mt-2">
-  <img src="/Quality_Attributes_ISO_25010.png" alt="Модель качества по ISO/IEC 25010: качество системы и программной продукции раскрывается на восемь характеристик — функциональная пригодность, уровень производительности, совместимость, удобство использования, надёжность, защищённость, сопровождаемость и переносимость" class="rounded shadow-md border border-gray-200 max-w-[840px] object-contain bg-white" />
+  <img src="/Quality_Attributes_ISO_25010.webp" alt="Модель качества по ISO/IEC 25010: качество системы и программной продукции раскрывается на восемь характеристик — функциональная пригодность, уровень производительности, совместимость, удобство использования, надёжность, защищённость, сопровождаемость и переносимость" class="rounded shadow-md border border-gray-200 max-w-[840px] object-contain bg-white" />
 </div>
 
 <!-- Источник -->

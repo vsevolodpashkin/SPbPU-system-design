@@ -76,7 +76,7 @@ layout: default
       <span>где работает сервис</span>
     </div>
     <div class="bg-white border border-slate-200 rounded-xl p-2">
-      <img src="/VM.png" alt="Стек виртуальной машины: от слоя приложения до физического сервера" class="w-full max-h-[400px] object-contain" />
+      <img src="/VM.webp" alt="Стек виртуальной машины: от слоя приложения до физического сервера" class="w-full max-h-[400px] object-contain" />
     </div>
   </div>
 
